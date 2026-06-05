@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TasteHub — Table Reservations</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="css/index.css">
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  <style>
+    /* 🌟 Seating Chart එක තවත් Premium කරන්න අවශ්‍ය වෙන අමතර Styles */
+    .restaurant-map-svg text {
+      font-family: 'Inter', sans-serif;
+      pointer-events: none; /* Text එක උඩ ක්ලික් කරද්දී Table එක සිලෙක්ට් වෙන්න */
+      user-select: none;
+    }
+    .table-label-id {
+      font-weight: 600;
+      fill: var(--color-text-light);
+      font-size: 11px;
+    }
+    .table-label-cap {
+      fill: var(--color-gold);
+      font-size: 9px;
+      letter-spacing: 0.05em;
+    }
+    .map-wall-line {
+      stroke: rgba(212, 175, 55, 0.15);
+      stroke-width: 2;
+      stroke-dasharray: 4 4;
+    }
+    /* මේස වටේ තියෙන පුටු වල ස්ටයිල් එක */
+    .mini-seat-dot {
+      fill: rgba(22, 28, 48, 0.8);
+      stroke: rgba(212, 175, 55, 0.3);
+      stroke-width: 1;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="container header-inner">
+    <a href="index.html" class="logo">TasteHub<span>.</span></a>
+    <button class="menu-toggle" id="mobileMenuBtn"><i class="fa-solid fa-bars-staggered"></i></button>
+    <nav id="navBar">
+      <ul class="nav-menu">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="menu.html" class="nav-link">Menu</a></li>
+        <li><a href="story.html" class="nav-link">Our Story</a></li>
+        <li><a href="reservations.html" class="nav-link active">Reservations</a></li>
+        <li><a href="contact.html" class="nav-link">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main class="container" style="padding-bottom: 5rem;">
+  <section style="padding: 4rem 0 1rem; text-align: center;">
+    <span style="font-family: var(--font-serif); color: var(--color-gold); letter-spacing: 0.2em; text-transform: uppercase; display: block; margin-bottom: 0.5rem;">Siting Reservation</span>
+    <h1>Table Reservations</h1>
+    <p>Secure your gastronomic seating below. Visual changes process instantly.</p>
+  </section>
+
+  <div class="live-alert" id="bookingAlert"></div>
+
+  <div class="reservation-layout">
+    <!-- Left Column: Booking Form -->
+    <div class="glass-card booking-form-box">
+      <form id="reservationForm" novalidate>
+        <div class="form-row">
+          <div class="form-group"><label class="form-label">Your Name</label><input type="text" name="name" class="form-control" required placeholder="e.g., Kavindu prabhash"></div>
+          <div class="form-group"><label class="form-label">Email Address</label><input type="email" name="email" class="form-control" required placeholder="e.g., Kavindu@gmail.com"></div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label class="form-label">Phone</label><input type="tel" name="phone" class="form-control" required placeholder="e.g., 0717889693"></div>
+          <div class="form-group">
+            <label class="form-label">Guests</label>
+            <select id="bookGuests" name="guests" class="form-control" required>
+              <option value="2">2 Guests</option>
+              <option value="4">4 Guests</option>
+              <option value="6">6 Guests</option>
+              <option value="8">8 Guests</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label class="form-label">Date</label><input type="date" id="bookDate" name="date" class="form-control" required></div>
+          <div class="form-group">
+            <label class="form-label">Time Slot</label>
+            <select id="bookTime" name="time" class="form-control" required>
+              <option value="18:00">18:00 – 19:30</option>
+              <option value="19:30">19:30 – 21:00</option>
+              <option value="21:00">21:00 – 22:30</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Selected Siting Location</label>
+          <input type="text" id="bookTableDisplay" class="form-control" readonly placeholder="Click an available table on the layout chart..." required style="border-color: rgba(212,175,55,0.4); font-weight: 500; color: var(--color-gold-hover);">
+          <input type="hidden" id="bookTableId" name="table_id">
+        </div>
+        <button type="submit" class="btn btn-primary" style="width:100%;">Confirm Fine Booking</button>
+      </form>
+    </div>
+
+    <!-- Right Column: Fully Enhanced Interactive Seating Grid Map -->
+    <div class="glass-card seating-chart-container" style="display: flex; flex-direction: column; justify-content: center; background: rgba(8, 12, 20, 0.65);">
+      <h3 style="font-size: 1.2rem; text-align: center; margin-bottom: 1.5rem; color: var(--color-text-light); letter-spacing: 0.05em;">
+        <i class="fa-solid fa-chair" style="color: var(--color-gold); margin-right: 8px;"></i> Interactive Dining Floor Map
+      </h3>
+
+      <svg viewBox="0 0 400 400" class="restaurant-map-svg" id="restaurantMap" style="background: #060913; border: 1px solid rgba(212, 175, 55, 0.15); border-radius: 6px; box-shadow: inset 0 0 20px rgba(0,0,0,0.6);">
+
+        <!-- Floor Architectural Boundaries (බිත්ති සලකුණු) -->
+        <line x1="20" y1="50" x2="380" y2="50" class="map-wall-line" />
+        <line x1="20" y1="360" x2="380" y2="360" class="map-wall-line" />
+
+        <!-- Executive Kitchen Backdrop Wrapper -->
+        <rect x="120" y="12" width="160" height="26" rx="4" fill="rgba(212,175,55,0.04)" stroke="rgba(212,175,55,0.25)" stroke-width="1" />
+        <text x="200" y="29" fill="rgba(212,175,55,0.8)" font-size="10" font-weight="600" text-anchor="middle" letter-spacing="0.1em">MAIN KITCHEN PASS</text>
+
+        <!-- Entrance Indicator Sign -->
+        <rect x="160" y="360" width="80" height="15" fill="#0d1222" stroke="rgba(212,175,55,0.3)" stroke-width="1"/>
+        <text x="200" y="371" fill="var(--color-text-muted)" font-size="9" text-anchor="middle">MAIN LOBBY ENTRY</text>
+
+        <!-- ==================== TABLE 01 (Couples Lounge) ==================== -->
+        <!-- Chairs Around T1 -->
+        <circle cx="50" cy="110" r="6" class="mini-seat-dot" />
+        <circle cx="110" cy="110" r="6" class="mini-seat-dot" />
+        <!-- Table Element -->
+        <circle cx="80" cy="110" r="25" class="table-seat" data-table-id="T1" data-capacity="2" id="svgTableT1" />
+        <!-- Inner Labels -->
+        <text x="80" y="108" text-anchor="middle" class="table-label-id">T1</text>
+        <text x="80" y="119" text-anchor="middle" class="table-label-cap">2 SEATS</text>
+
+        <!-- ==================== TABLE 02 (Window Booth) ==================== -->
+        <!-- Chairs Around T2 -->
+        <circle cx="285" cy="68" r="6" class="mini-seat-dot" />
+        <circle cx="250" cy="68" r="6" class="mini-seat-dot" />
+        <circle cx="285" cy="132" r="6" class="mini-seat-dot" />
+        <circle cx="250" cy="132" r="6" class="mini-seat-dot" />
+        <!-- Table Element -->
+        <rect x="235" y="80" width="65" height="40" rx="4" class="table-seat" data-table-id="T2" data-capacity="4" id="svgTableT2" />
+        <!-- Inner Labels -->
+        <text x="2675" y="98" text-anchor="middle" class="table-label-id" transform="translate(-2408, 0)">T2</text>
+        <text x="267" y="110" text-anchor="middle" class="table-label-cap">4 SEATS</text>
+
+        <!-- ==================== TABLE 03 (Standard Dine) ==================== -->
+        <!-- Chairs Around T3 -->
+        <circle cx="80" cy="188" r="6" class="mini-seat-dot" />
+        <circle cx="80" cy="252" r="6" class="mini-seat-dot" />
+        <!-- Table Element -->
+        <rect x="60" y="200" width="40" height="40" rx="4" class="table-seat" data-table-id="T3" data-capacity="2" id="svgTableT3" />
+        <!-- Inner Labels -->
+        <text x="80" y="218" text-anchor="middle" class="table-label-id">T3</text>
+        <text x="80" y="230" text-anchor="middle" class="table-label-cap">2 SEATS</text>
+
+        <!-- ==================== TABLE 04 (Executive Family Line) ==================== -->
+        <!-- Chairs Around T4 -->
+        <circle cx="250" cy="168" r="6" class="mini-seat-dot" />
+        <circle cx="285" cy="168" r="6" class="mini-seat-dot" />
+        <circle cx="320" cy="168" r="6" class="mini-seat-dot" />
+        <circle cx="250" cy="237" r="6" class="mini-seat-dot" />
+        <circle cx="285" cy="237" r="6" class="mini-seat-dot" />
+        <circle cx="320" cy="237" r="6" class="mini-seat-dot" />
+        <!-- Table Element -->
+        <rect x="235" y="180" width="100" height="45" rx="4" class="table-seat" data-table-id="T4" data-capacity="6" id="svgTableT4" />
+        <!-- Inner Labels -->
+        <text x="285" y="201" text-anchor="middle" class="table-label-id">T4</text>
+        <text x="285" y="213" text-anchor="middle" class="table-label-cap">6 SEATS</text>
+
+        <!-- ==================== TABLE 05 (Royal Round Table) ==================== -->
+        <!-- Chairs Around T5 -->
+        <circle cx="110" cy="272" r="6" class="mini-seat-dot" />
+        <circle cx="110" cy="348" r="6" class="mini-seat-dot" />
+        <circle cx="72" cy="310" r="6" class="mini-seat-dot" />
+        <circle cx="148" cy="310" r="6" class="mini-seat-dot" />
+        <!-- Table Element -->
+        <circle cx="110" cy="310" r="28" class="table-seat" data-table-id="T5" data-capacity="4" id="svgTableT5" />
+        <!-- Inner Labels -->
+        <text x="110" y="307" text-anchor="middle" class="table-label-id">T5</text>
+        <text x="110" y="318" text-anchor="middle" class="table-label-cap">4 SEATS</text>
+
+        <!-- ==================== TABLE 06 (Grand Banquet Gala) ==================== -->
+        <!-- Chairs Around T6 -->
+        <circle cx="240" cy="265" r="6" class="mini-seat-dot" />
+        <circle cx="280" cy="265" r="6" class="mini-seat-dot" />
+        <circle cx="320" cy="265" r="6" class="mini-seat-dot" />
+        <circle cx="240" cy="355" r="6" class="mini-seat-dot" />
+        <circle cx="280" cy="355" r="6" class="mini-seat-dot" />
+        <circle cx="320" cy="355" r="6" class="mini-seat-dot" />
+        <circle cx="215" cy="310" r="6" class="mini-seat-dot" />
+        <circle cx="345" cy="310" r="6" class="mini-seat-dot" />
+        <!-- Table Element -->
+        <ellipse cx="280" cy="310" rx="55" ry="32" class="table-seat" data-table-id="T6" data-capacity="8" id="svgTableT6" />
+        <!-- Inner Labels -->
+        <text x="280" y="307" text-anchor="middle" class="table-label-id">T6 - VIP</text>
+        <text x="280" y="319" text-anchor="middle" class="table-label-cap">8 SEATS</text>
+
+      </svg>
+
+      <!-- Map Colors/Legend Indicators -->
+      <div class="map-legend" style="display: flex; justify-content: space-between; width: 100%; margin-top: 1.2rem; background: rgba(5, 8, 17, 0.5); padding: 0.6rem; border-radius: 4px; border: 1px solid rgba(212,175,55,0.08);">
+        <span style="display: flex; align-items: center; gap: 6px;"><span style="display:inline-block; width:12px; height:12px; background:rgba(22,28,48,0.6); border:1px solid rgba(212,175,55,0.4); border-radius:2px;"></span> Available</span>
+        <span style="display: flex; align-items: center; gap: 6px;"><span style="display:inline-block; width:12px; height:12px; background:rgba(212,175,55,0.35); border:1px solid var(--color-gold); border-radius:2px;"></span> Selected</span>
+        <span style="display: flex; align-items: center; gap: 6px;"><span style="display:inline-block; width:12px; height:12px; background:rgba(239,68,68,0.25); border:1px solid var(--color-error); border-radius:2px;"></span> Occupied</span>
+      </div>
+    </div>
+  </div>
+</main>
+
+<!-- Unified Premium Reusable Footer Component -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h4>TasteHub<span>.</span></h4>
+        <p style="margin-top: 1rem;">An exquisite culinary journey blending classic roots with hyper-modern dining styles. Taste the stars, savour the atmosphere.</p>
+        <div class="social-links">
+          <a href="#" class="social-link" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="#" class="social-link" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          <a href="#" class="social-link" aria-label="Twitter"><i class="fa-brands fa-twitter"></i></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h5>Navigation</h5>
+        <ul class="footer-links">
+          <li><a href="index.html" class="footer-link"><i class="fa-solid fa-chevron-right" style="font-size: 0.7rem; margin-right: 5px; color: var(--color-gold);"></i> Home</a></li>
+          <li><a href="menu.html" class="footer-link"><i class="fa-solid fa-chevron-right" style="font-size: 0.7rem; margin-right: 5px; color: var(--color-gold);"></i> Our Menu</a></li>
+          <li><a href="story.html" class="footer-link"><i class="fa-solid fa-chevron-right" style="font-size: 0.7rem; margin-right: 5px; color: var(--color-gold);"></i> Culinary Story</a></li>
+          <li><a href="reservations.html" class="footer-link"><i class="fa-solid fa-chevron-right" style="font-size: 0.7rem; margin-right: 5px; color: var(--color-gold);"></i> Online Booking</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Hours</h5>
+        <ul class="footer-links" style="pointer-events: none;">
+          <li><strong>Tue – Sat:</strong> 17:30 – 23:30</li>
+          <li><strong>Sunday Brunch:</strong> 11:30 – 15:30</li>
+          <li style="color: var(--color-gold);"><strong>Monday:</strong> Closed</li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Address</h5>
+        <p style="margin-bottom: 0.5rem;"><i class="fa-solid fa-location-dot" style="color: var(--color-gold); margin-right: 8px;"></i> 42 Galle Face Court, Colombo 00300, Sri Lanka</p>
+        <p style="margin-bottom: 0.5rem;"><i class="fa-solid fa-phone" style="color: var(--color-gold); margin-right: 8px;"></i> +94 11 234 5678</p>
+        <p><i class="fa-solid fa-envelope" style="color: var(--color-gold); margin-right: 8px;"></i> contact@tastehub.lk</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 TasteHub Gastronomy SA. All rights reserved. Designed for university web assessment standards.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="js/app.js"></script>
+</body>
+</html>

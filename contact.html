@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TasteHub — Contact</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="css/index.css">
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+</head>
+<body>
+<header>
+  <div class="container header-inner">
+    <a href="index.html" class="logo">TasteHub<span>.</span></a>
+    <button class="menu-toggle" id="mobileMenuBtn"><i class="fa-solid fa-bars-staggered"></i></button>
+    <nav id="navBar">
+      <ul class="nav-menu">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="menu.html" class="nav-link">Menu</a></li>
+        <li><a href="story.html" class="nav-link">Our Story</a></li>
+        <li><a href="reservations.html" class="nav-link">Reservations</a></li>
+        <li><a href="contact.html" class="nav-link active">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main class="container" style="padding-top: 2rem; padding-bottom: 5rem;">
+  <div class="contact-layout">
+    <div class="glass-card">
+      <h3>Inquiries & Feedback</h3>
+      <div class="live-alert" id="contactAlert" style="margin-top: 1rem; margin-bottom: 1rem;"></div>
+      <form id="contactForm" novalidate style="margin-top: 1.5rem;">
+        <div class="form-group">
+          <label class="form-label">Your Name</label>
+          <input type="text" name="name" class="form-control" required placeholder="e.g., Kavindu prabhash">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Email Address</label>
+          <input type="email" name="email" class="form-control" required placeholder="e.g., kavindu@gmail.com">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Subject</label>
+          <input type="text" name="subject" class="form-control" required placeholder="e.g., Private Event Siting">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Message</label>
+          <textarea name="message" class="form-control" required placeholder="Describe your request in detail..."></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary" style="width:100%; margin-top: 1rem;">Send Inquiry</button>
+      </form>
+    </div>
+
+    <div style="display:flex; flex-direction:column; gap:1.5rem;">
+
+      <div class="map-wrapper" style="height: 350px; border-radius:8px; overflow:hidden; border: 1px solid rgba(212, 175, 55, 0.2); box-shadow: var(--shadow-premium);">
+        <iframe
+                src="https://maps.google.com/maps?q=Galle%20Face%20Court,%20Colombo&t=k&z=17&ie=UTF8&iwloc=&output=embed"
+                width="100%"
+                height="100%"
+                style="border:0;"
+                allowfullscreen=""
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+      </div>
+
+      <div class="glass-card" style="padding: 1.5rem; background: rgba(13, 18, 34, 0.95); border-color: rgba(212, 175, 55, 0.3);">
+        <h4 style="font-size: 1.1rem; color: var(--color-gold); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 1rem; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 0.4rem;">
+          <i class="fa-solid fa-building" style="margin-right: 8px;"></i> Location Head Office
+        </h4>
+
+        <div style="display: grid; grid-template-columns: 1fr; gap: 0.75rem; font-size: 0.9rem; color: var(--color-text-muted);">
+          <p style="margin-bottom: 0;"><strong style="color: var(--color-text-light);">Address:</strong> No. 42, Galle Face Court, Colombo 00300, Sri Lanka.</p>
+          <p style="margin-bottom: 0;"><strong style="color: var(--color-text-light);">Hotline:</strong> +94 11 234 5678</p>
+          <p style="margin-bottom: 0;"><strong style="color: var(--color-text-light);">Email:</strong> contact@tastehub.lk</p>
+          <p style="margin-bottom: 0;"><strong style="color: var(--color-gold-hover);">Note:</strong> Click the map menu controls to toggle between standard 2D view and real 3D Satellite imagery.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h4>TasteHub<span>.</span></h4>
+        <p style="margin-top: 1rem;">An exquisite culinary journey blending classic roots with hyper-modern dining styles. Taste the stars, savour the atmosphere.</p>
+        <div class="social-links">
+          <a href="#" class="social-link" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="#" class="social-link" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          <a href="#" class="social-link" aria-label="Twitter"><i class="fa-brands fa-twitter"></i></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h5>Navigation</h5>
+        <ul class="footer-links">
+          <li><a href="index.html"><i class="fa-solid fa-chevron-right" style="font-size: 0.7rem; margin-right: 5px; color: var(--color-gold);"></i> Home</a></li>
+          <li><a href="menu.html"><i class="fa-solid fa-chevron-right" style="font-size: 0.7rem; margin-right: 5px; color: var(--color-gold);"></i> Our Menu</a></li>
+          <li><a href="story.html"><i class="fa-solid fa-chevron-right" style="font-size: 0.7rem; margin-right: 5px; color: var(--color-gold);"></i> Culinary Story</a></li>
+          <li><a href="reservations.html"><i class="fa-solid fa-chevron-right" style="font-size: 0.7rem; margin-right: 5px; color: var(--color-gold);"></i> Online Booking</a></li>
+
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Hours</h5>
+        <ul class="footer-links" style="pointer-events: none;">
+          <li><strong>Tue – Sat:</strong> 17:30 – 23:30</li>
+          <li><strong>Sunday Brunch:</strong> 11:30 – 15:30</li>
+          <li style="color: var(--color-gold);"><strong>Monday:</strong> Closed</li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Address</h5>
+        <p style="margin-bottom: 0.5rem;"><i class="fa-solid fa-location-dot" style="color: var(--color-gold); margin-right: 8px;"></i> 42 Galle Face Court, Colombo 00300, Sri Lanka</p>
+        <p style="margin-bottom: 0.5rem;"><i class="fa-solid fa-phone" style="color: var(--color-gold); margin-right: 8px;"></i> +94 11 234 5678</p>
+        <p><i class="fa-solid fa-envelope" style="color: var(--color-gold); margin-right: 8px;"></i> contact@tastehub.lk</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 TasteHub Gastronomy SA. All rights reserved. Designed for university web assessment standards.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TasteHub — Modern Parisian Gastronomy & Lounge</title>
+  <meta name="description" content="Immerse in classic French culinary artistry fused with modern luxury. Experience TasteHub in the heart of Colombo.">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="css/index.css">
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+</head>
+<body>
+
+<header>
+  <div class="container header-inner">
+    <a href="index.html" class="logo" id="headerLogo">TasteHub<span>.</span></a>
+    <button class="menu-toggle" id="mobileMenuBtn" aria-label="Toggle navigation menu"><i class="fa-solid fa-bars-staggered"></i></button>
+    <nav id="navBar">
+      <ul class="nav-menu">
+        <li><a href="index.html" class="nav-link active">Home</a></li>
+        <li><a href="menu.html" class="nav-link">Menu</a></li>
+        <li><a href="story.html" class="nav-link">Our Story</a></li>
+        <li><a href="reservations.html" class="nav-link">Reservations</a></li>
+        <li><a href="contact.html" class="nav-link">Contact</a></li>
+        <li><a href="reservations.html" class="btn btn-outline" style="padding: 0.5rem 1.25rem; font-size: 0.9rem;">Book Table</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="hero-section" style="background-image: url('https://images.unsplash.com/photo-1514933651103-005eec06c04b?q=80&w=1920&auto=format&fit=crop');">
+    <div class="hero-overlay"></div>
+    <div class="container hero-content">
+      <span class="hero-subtitle">Classic Heritage. Modern Elegance.</span>
+      <h1>Gastronomy Inspired by the Stars</h1>
+      <p style="font-size: 1.25rem; max-width: 650px; margin: 0 auto 2.5rem; color: var(--color-text-light); opacity: 0.85;">
+        Experience an avant-garde exploration of premium French cuisine, handcrafted cocktails, and premier vintage selections in the heart of Colombo.
+      </p>
+      <div class="hero-cta">
+        <a href="reservations.html" class="btn btn-primary">Reserve A Table</a>
+        <a href="menu.html" class="btn btn-outline">Explore Menu</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="container" style="padding: 6rem 0 2rem;">
+    <div class="split-promo">
+      <div class="split-text">
+        <span style="font-family: var(--font-serif); font-size: 1.1rem; color: var(--color-gold); letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 0.75rem; display: block;">The Master Essence</span>
+        <h2>A Symphony of Flavours and Senses</h2>
+        <p style="font-size: 1.05rem; line-height: 1.8;">
+          At TasteHub, our culinary philosophy is grounded in honoring traditional French techniques while embracing bold, innovative gastronomy. Led by expert hands, our team creates dishes that tell a story—utilizing locally-sourced organic ingredients.
+        </p>
+        <a href="story.html" class="btn btn-outline">Our Culinary Journey</a>
+      </div>
+      <div class="split-image-container">
+        <div class="split-image-frame"></div>
+        <img src="https://images.unsplash.com/photo-1550966871-3ed3cdb5ed0c?q=80&w=800&auto=format&fit=crop" alt="Premium Dining" class="split-image">
+      </div>
+    </div>
+  </section>
+
+  <section style="background: rgba(13, 18, 34, 0.3); border-top: 1px solid rgba(212, 175, 55, 0.08); padding: 6rem 0;">
+    <div class="container" style="text-align: center;">
+      <span style="font-family: var(--font-serif); font-size: 1.1rem; color: var(--color-gold); text-transform: uppercase; display: block; margin-bottom: 0.5rem;">Curated Selections</span>
+      <h2 class="accent-title">The Signature Showpieces</h2>
+
+      <div class="featured-menu-grid">
+        <div class="menu-card">
+          <div class="menu-card-img" style="background-image: url('https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=400&auto=format&fit=crop');"></div>
+          <div class="menu-card-body">
+            <div class="menu-card-header">
+              <h3 class="menu-card-title">Luxury Steak & Fries</h3>
+              <span class="menu-card-price">Rs. 3,500</span>
+            </div>
+            <p class="menu-card-desc">Prime tenderloin beef, gold leaf butter, wild mushroom duxelles, red wine reduction glaze.</p>
+          </div>
+        </div>
+
+        <div class="menu-card">
+          <div class="menu-card-img" style="background-image: url('https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?q=80&w=400&auto=format&fit=crop');"></div>
+          <div class="menu-card-body">
+            <div class="menu-card-header">
+              <h3 class="menu-card-title">Seared Sea Scallops</h3>
+              <span class="menu-card-price">Rs. 2,400</span>
+            </div>
+            <p class="menu-card-desc">Pan-seared sea scallops, cauliflower silk purée, golden saffron-infused butter, organic garden microgreens.</p>
+          </div>
+        </div>
+
+        <div class="menu-card">
+          <div class="menu-card-img" style="background-image: url('https://images.unsplash.com/photo-1551024709-8f23befc6f87?q=80&w=400&auto=format&fit=crop');"></div>
+          <div class="menu-card-body">
+            <div class="menu-card-header">
+              <h3 class="menu-card-title">TasteHub Royale</h3>
+              <span class="menu-card-price">Rs. 2,200</span>
+            </div>
+            <p class="menu-card-desc">Gourmet cognac base, champagne splash, freshly harvested rosemary sprigs, gold dust flakes.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h4>TasteHub<span>.</span></h4>
+        <p style="margin-top: 1rem;">An exquisite culinary journey blending classic roots with hyper-modern dining styles. Taste the stars, savour the atmosphere.</p>
+        <div class="social-links">
+          <a href="#" class="social-link" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="#" class="social-link" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          <a href="#" class="social-link" aria-label="Twitter"><i class="fa-brands fa-twitter"></i></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h5>Navigation</h5>
+        <ul class="footer-links">
+          <li><a href="index.html" class="footer-link"><i class="fa-solid fa-chevron-right" style="font-size: 0.7rem; margin-right: 5px; color: var(--color-gold);"></i> Home</a></li>
+          <li><a href="menu.html" class="footer-link"><i class="fa-solid fa-chevron-right" style="font-size: 0.7rem; margin-right: 5px; color: var(--color-gold);"></i> Our Menu</a></li>
+          <li><a href="story.html" class="footer-link"><i class="fa-solid fa-chevron-right" style="font-size: 0.7rem; margin-right: 5px; color: var(--color-gold);"></i> Culinary Story</a></li>
+          <li><a href="reservations.html" class="footer-link"><i class="fa-solid fa-chevron-right" style="font-size: 0.7rem; margin-right: 5px; color: var(--color-gold);"></i> Online Booking</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Hours</h5>
+        <ul class="footer-links" style="pointer-events: none;">
+          <li><strong>Tue – Sat:</strong> 17:30 – 23:30</li>
+          <li><strong>Sunday Brunch:</strong> 11:30 – 15:30</li>
+          <li style="color: var(--color-gold);"><strong>Monday:</strong> Closed</li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Address</h5>
+        <p style="margin-bottom: 0.5rem;"><i class="fa-solid fa-location-dot" style="color: var(--color-gold); margin-right: 8px;"></i> 42 Galle Face Court, Colombo 00300, Sri Lanka</p>
+        <p style="margin-bottom: 0.5rem;"><i class="fa-solid fa-phone" style="color: var(--color-gold); margin-right: 8px;"></i> +94 11 234 5678</p>
+        <p><i class="fa-solid fa-envelope" style="color: var(--color-gold); margin-right: 8px;"></i> contact@tastehub.lk</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 TasteHub Gastronomy SA. All rights reserved. Designed for university web assessment standards.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TasteHub — Food Menu & Online Ordering</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="css/index.css">
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+</head>
+<body>
+
+<header>
+  <div class="container header-inner">
+    <a href="index.html" class="logo">TasteHub<span>.</span></a>
+    <button class="menu-toggle" id="mobileMenuBtn" aria-label="Toggle navigation menu"><i class="fa-solid fa-bars-staggered"></i></button>
+    <nav id="navBar">
+      <ul class="nav-menu">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="menu.html" class="nav-link active">Menu</a></li>
+        <li><a href="story.html" class="nav-link">Our Story</a></li>
+        <li><a href="reservations.html" class="nav-link">Reservations</a></li>
+        <li><a href="contact.html" class="nav-link">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main class="container" style="padding-bottom: 5rem;">
+  <section style="padding: 4rem 0 2rem; text-align: center;">
+    <span style="font-family: var(--font-serif); color: var(--color-gold); letter-spacing: 0.25em; text-transform: uppercase; display: block; margin-bottom: 0.5rem;">The Culinary Ledger</span>
+    <h1>Our Restaurant Menu</h1>
+    <p style="max-width: 600px; margin: 0 auto;">Filter by course or select items directly to place your dynamic food order online.</p>
+  </section>
+
+  <div class="menu-controls">
+    <div class="menu-filter-row">
+      <div class="menu-filter-btn-group">
+        <button class="filter-btn active" data-category="all">All Items</button>
+        <button class="filter-btn" data-category="starters">Starters</button>
+        <button class="filter-btn" data-category="mains">Main Courses</button>
+        <button class="filter-btn" data-category="desserts">Desserts</button>
+        <button class="filter-btn" data-category="cocktails">Cocktails</button>
+      </div>
+      <div class="dietary-options" id="dietaryGroup">
+        <label class="checkbox-label"><input type="checkbox" value="vegan"> Vegan</label>
+        <label class="checkbox-label"><input type="checkbox" value="gluten_free"> Gluten-Free</label>
+        <label class="checkbox-label"><input type="checkbox" value="organic"> Organic</label>
+        <label class="checkbox-label"><input type="checkbox" value="chefs_special"> Chef's Choice</label>
+      </div>
+    </div>
+  </div>
+
+  <div style="display:grid; grid-template-columns: 1.2fr 0.8fr; gap:2.5rem;" class="reservation-layout">
+
+    <div class="menu-grid-display" id="menuDisplayGrid" style="grid-template-columns: 1fr; gap:1.5rem;">
+
+      <div class="menu-item-row" data-category="starters" data-tags="organic">
+        <div class="menu-item-thumb" style="background-image: url('https://images.unsplash.com/photo-1547592165-e1d17fed6005?q=80&w=300&auto=format&fit=crop');"></div>
+        <div class="menu-item-info">
+          <div class="menu-item-header"><h3>French Onion Soup Gratin</h3><span class="menu-item-price">Rs. 1,600</span></div>
+          <p class="menu-item-desc">Caramelized sweet onions, beef broth, toasted sourdough gratinée with thick-cut cave-aged Gruyère.</p>
+          <button class="btn btn-outline btn-add-cart" data-id="m1" data-title="French Onion Soup" data-price="1600" style="padding: 0.3rem 1rem; font-size:0.8rem; margin-top: 0.5rem;">Add to Order</button>
+        </div>
+      </div>
+
+      <div class="menu-item-row" data-category="starters" data-tags="gluten_free organic chefs_special">
+        <div class="menu-item-thumb" style="background-image: url('https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?q=80&w=300&auto=format&fit=crop');"></div>
+        <div class="menu-item-info">
+          <div class="menu-item-header"><h3>Seared Sea Scallops</h3><span class="menu-item-price">Rs. 2,400</span></div>
+          <p class="menu-item-desc">Pan-seared sea scallops, cauliflower silk purée, golden saffron-infused butter.</p>
+          <button class="btn btn-outline btn-add-cart" data-id="m2" data-title="Seared Sea Scallops" data-price="2400" style="padding: 0.3rem 1rem; font-size:0.8rem; margin-top: 0.5rem;">Add to Order</button>
+        </div>
+      </div>
+
+      <div class="menu-item-row" data-category="starters" data-tags="vegan organic">
+        <div class="menu-item-thumb" style="background-image: url('https://images.unsplash.com/photo-1572453800999-e8d2d1589b7c?q=80&w=300&auto=format&fit=crop');"></div>
+        <div class="menu-item-info">
+          <div class="menu-item-header"><h3>Baked Vegetable Pastry Crust</h3><span class="menu-item-price">Rs. 1,850</span></div>
+          <p class="menu-item-desc">Slow-roasted organic summer zucchini, eggplant, baked inside a delicate vegan puff pastry shell.</p>
+          <button class="btn btn-outline btn-add-cart" data-id="m3" data-title="Baked Vegetable Pastry" data-price="1850" style="padding: 0.3rem 1rem; font-size:0.8rem; margin-top: 0.5rem;">Add to Order</button>
+        </div>
+      </div>
+
+      <div class="menu-item-row" data-category="mains" data-tags="gluten_free">
+        <div class="menu-item-thumb" style="background-image: url('https://images.unsplash.com/photo-1518492104633-130d0cc84637?q=80&w=300&auto=format&fit=crop');"></div>
+        <div class="menu-item-info">
+          <div class="menu-item-header"><h3>Crispy Duck Breast</h3><span class="menu-item-price">Rs. 3,200</span></div>
+          <p class="menu-item-desc">Crispy skin roasted duck breast, blood orange glaze, braised Belgian endive, parsnip mousse.</p>
+          <button class="btn btn-outline btn-add-cart" data-id="m4" data-title="Crispy Duck Breast" data-price="3200" style="padding: 0.3rem 1rem; font-size:0.8rem; margin-top: 0.5rem;">Add to Order</button>
+        </div>
+      </div>
+
+      <div class="menu-item-row" data-category="mains" data-tags="organic">
+        <div class="menu-item-thumb" style="background-image: url('https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?q=80&w=300&auto=format&fit=crop');"></div>
+        <div class="menu-item-info">
+          <div class="menu-item-header"><h3>Wild Pan-Seared River Trout</h3><span class="menu-item-price">Rs. 2,900</span></div>
+          <p class="menu-item-desc">Whole pan-seared river trout, nutty brown butter sauce, roasted slivered almonds, fresh lemon.</p>
+          <button class="btn btn-outline btn-add-cart" data-id="m5" data-title="Wild River Trout" data-price="2900" style="padding: 0.3rem 1rem; font-size:0.8rem; margin-top: 0.5rem;">Add to Order</button>
+        </div>
+      </div>
+
+      <div class="menu-item-row" data-category="mains" data-tags="gluten_free chefs_special">
+        <div class="menu-item-thumb" style="background-image: url('https://images.unsplash.com/photo-1600891964599-f61ba0e24092?q=80&w=300&auto=format&fit=crop');"></div>
+        <div class="menu-item-info">
+          <div class="menu-item-header"><h3>Luxury Steak & Fries</h3><span class="menu-item-price">Rs. 3,500</span></div>
+          <p class="menu-item-desc">Aged pasture-fed Angus ribeye steak, golden white truffle oil-dusted fries, signature cognac sauce.</p>
+          <button class="btn btn-outline btn-add-cart" data-id="m6" data-title="Luxury Steak & Fries" data-price="3500" style="padding: 0.3rem 1rem; font-size:0.8rem; margin-top: 0.5rem;">Add to Order</button>
+        </div>
+      </div>
+
+      <div class="menu-item-row" data-category="mains" data-tags="vegan gluten_free organic">
+        <div class="menu-item-thumb" style="background-image: url('https://images.unsplash.com/photo-1476124369491-e7addf5db371?q=80&w=300&auto=format&fit=crop');"></div>
+        <div class="menu-item-info">
+          <div class="menu-item-header"><h3>Wild Mushroom Risotto</h3><span class="menu-item-price">Rs. 2,650</span></div>
+          <p class="menu-item-desc">Creamy Carnaroli arborio rice, wild gathered chanterelle mushrooms, black truffle oil drizzle.</p>
+          <button class="btn btn-outline btn-add-cart" data-id="m7" data-title="Wild Mushroom Risotto" data-price="2650" style="padding: 0.3rem 1rem; font-size:0.8rem; margin-top: 0.5rem;">Add to Order</button>
+        </div>
+      </div>
+
+      <div class="menu-item-row" data-category="desserts" data-tags="gluten_free organic chefs_special">
+        <div class="menu-item-thumb" style="background-image: url('https://images.unsplash.com/photo-1606313564200-e75d5e30476c?q=80&w=300&auto=format&fit=crop');"></div>
+        <div class="menu-item-info">
+          <div class="menu-item-header"><h3>Dark Chocolate Soufflé</h3><span class="menu-item-price">Rs. 1,700</span></div>
+          <p class="menu-item-desc">Molten 70% dark Valrhona chocolate soufflé, whipped double cream, raspberries.</p>
+          <button class="btn btn-outline btn-add-cart" data-id="m8" data-title="Dark Chocolate Soufflé" data-price="1700" style="padding: 0.3rem 1rem; font-size:0.8rem; margin-top: 0.5rem;">Add to Order</button>
+        </div>
+      </div>
+
+      <div class="menu-item-row" data-category="desserts" data-tags="vegan organic">
+        <div class="menu-item-thumb" style="background-image: url('https://images.unsplash.com/photo-1519869325930-281384150729?q=80&w=300&auto=format&fit=crop');"></div>
+        <div class="menu-item-info">
+          <div class="menu-item-header"><h3>Upside-Down Caramelized Pear Tart</h3><span class="menu-item-price">Rs. 1,500</span></div>
+          <p class="menu-item-desc">Upside-down caramelized organic Bosc pears over crisp pastry, rich vegan cinnamon syrup.</p>
+          <button class="btn btn-outline btn-add-cart" data-id="m9" data-title="Caramelized Pear Tart" data-price="1500" style="padding: 0.3rem 1rem; font-size:0.8rem; margin-top: 0.5rem;">Add to Order</button>
+        </div>
+      </div>
+
+      <div class="menu-item-row" data-category="cocktails" data-tags="vegan gluten_free organic chefs_special">
+        <div class="menu-item-thumb" style="background-image: url('https://images.unsplash.com/photo-1551024709-8f23befc6f87?q=80&w=300&auto=format&fit=crop');"></div>
+        <div class="menu-item-info">
+          <div class="menu-item-header"><h3>TasteHub Royal Cocktail</h3><span class="menu-item-price">Rs. 2,200</span></div>
+          <p class="menu-item-desc">Fine Hennessy cognac, dry vermouth, elderflower liquor, topped with cold champagne float.</p>
+          <button class="btn btn-outline btn-add-cart" data-id="m10" data-title="TasteHub Royal Cocktail" data-price="2200" style="padding: 0.3rem 1rem; font-size:0.8rem; margin-top: 0.5rem;">Add to Order</button>
+        </div>
+      </div>
+
+      <div class="menu-item-row" data-category="cocktails" data-tags="vegan gluten_free organic">
+        <div class="menu-item-thumb" style="background-image: url('https://images.unsplash.com/photo-1536935338788-846bb9981813?q=80&w=300&auto=format&fit=crop');"></div>
+        <div class="menu-item-info">
+          <div class="menu-item-header"><h3>Rose & Cardamom Botanic Fizz</h3><span class="menu-item-price">Rs. 1,400</span></div>
+          <p class="menu-item-desc">Zero-proof organic juniper distillation, botanical wild rose water, crushed cardamom pods.</p>
+          <button class="btn btn-outline btn-add-cart" data-id="m11" data-title="Rose & Cardamom Fizz" data-price="1400" style="padding: 0.3rem 1rem; font-size:0.8rem; margin-top: 0.5rem;">Add to Order</button>
+        </div>
+      </div>
+
+    </div>
+
+    <div style="flex-direction: column;">
+      <div class="glass-card" id="cartSection" style="display:block; height: fit-content; padding: 2rem; position: sticky; top: 100px;">
+        <h3 style="border-bottom:1px solid rgba(212,175,55,0.2); padding-bottom:0.5rem; margin-bottom:1rem;">Your Food Order</h3>
+        <div id="cartItemsList" style="max-height:240px; overflow-y:auto; margin-bottom:1.5rem;">
+          <p style="color: var(--color-text-muted); text-align:center;">Your cart is empty. Click "Add to Order" to add delicious food!</p>
+        </div>
+        <div style="display:flex; justify-content:space-between; font-weight:bold; font-size:1.2rem; margin-bottom:1.5rem; color:var(--color-gold);">
+          <span>Total:</span><span id="cartTotalDisplay">Rs. 0</span>
+        </div>
+        <div class="live-alert" id="orderAlert"></div>
+        <form id="foodOrderForm">
+          <div class="form-group" style="margin-bottom:1rem;">
+            <label class="form-label">Your Name</label>
+            <input type="text" id="customerName" class="form-control" placeholder="e.g., Kavindu prabhash" required>
+          </div>
+          <div class="form-group" style="margin-bottom:1.5rem;">
+            <label class="form-label">Email Address</label>
+            <input type="email" id="customerEmail" class="form-control" placeholder="e.g., kavindu@gmail.com" required>
+          </div>
+          <button type="submit" class="btn btn-primary" style="width:100%; margin-bottom:0.5rem;">Place Food Order</button>
+          <button type="button" class="btn btn-outline" id="btnClearCart" style="width:100%; font-size:0.8rem; padding:0.4rem;">Clear Cart</button>
+        </form>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="wine-pairing-widget" style="margin-top: 5rem;">
+    <div class="wine-widget-grid">
+      <div class="wine-visualizer">
+        <div class="bottle-glow"></div>
+        <div class="bottle-graphic" id="wineIcon"><i class="fa-solid fa-wine-bottle" style="color: var(--color-gold);"></i></div>
+      </div>
+      <div class="wine-pairing-details">
+        <h2>The Art of Wine Pairing</h2>
+        <select class="form-control" id="wineEntreeSelect">
+          <option value="" disabled selected>— Select a course —</option>
+          <option value="scallops">Seared Sea Scallops</option>
+          <option value="duck">Crispy Duck Breast</option>
+          <option value="trout">Wild River Trout</option>
+          <option value="ribeye">Luxury Steak & Fries</option>
+        </select>
+        <div class="wine-result" id="wineResultBox">
+          <h4 id="wineRecName">Vintage Name</h4>
+          <p id="wineRecDesc"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h4>TasteHub<span>.</span></h4>
+        <p style="margin-top: 1rem;">An exquisite culinary journey blending classic roots with hyper-modern dining styles. Taste the stars, savour the atmosphere.</p>
+        <div class="social-links">
+          <a href="#" class="social-link" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="#" class="social-link" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          <a href="#" class="social-link" aria-label="Twitter"><i class="fa-brands fa-twitter"></i></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h5>Navigation</h5>
+        <ul class="footer-links">
+          <li><a href="index.html"><i class="fa-solid fa-chevron-right" style="font-size: 0.7rem; margin-right: 5px; color: var(--color-gold);"></i> Home</a></li>
+          <li><a href="menu.html"><i class="fa-solid fa-chevron-right" style="font-size: 0.7rem; margin-right: 5px; color: var(--color-gold);"></i> Our Menu</a></li>
+          <li><a href="story.html"><i class="fa-solid fa-chevron-right" style="font-size: 0.7rem; margin-right: 5px; color: var(--color-gold);"></i> Culinary Story</a></li>
+          <li><a href="reservations.html"><i class="fa-solid fa-chevron-right" style="font-size: 0.7rem; margin-right: 5px; color: var(--color-gold);"></i> Online Booking</a></li>
+
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Hours</h5>
+        <ul class="footer-links" style="pointer-events: none;">
+          <li><strong>Tue – Sat:</strong> 17:30 – 23:30</li>
+          <li><strong>Sunday Brunch:</strong> 11:30 – 15:30</li>
+          <li style="color: var(--color-gold);"><strong>Monday:</strong> Closed</li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Address</h5>
+        <p style="margin-bottom: 0.5rem;"><i class="fa-solid fa-location-dot" style="color: var(--color-gold); margin-right: 8px;"></i> 42 Galle Face Court, Colombo 00300, Sri Lanka</p>
+        <p style="margin-bottom: 0.5rem;"><i class="fa-solid fa-phone" style="color: var(--color-gold); margin-right: 8px;"></i> +94 11 234 5678</p>
+        <p><i class="fa-solid fa-envelope" style="color: var(--color-gold); margin-right: 8px;"></i> contact@tastehub.lk</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 TasteHub Gastronomy SA. All rights reserved. Designed for university web assessment standards.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="js/app.js"></script>
+</body>
+</html>
